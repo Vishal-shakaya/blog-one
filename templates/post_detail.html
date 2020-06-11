@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load urlshr %}
+
+{% block navbar %}
+<div class="container-sm ">
+    <div class="jumbotron">
+      
+                <img width="350px" height="250px" src="{{post.image.url}}" alt="image">
+        <h2 class="text-secondary">
+            <p class="">{{post.title|capfirst}}
+                <h4> <small class="text-info"> Updated  {{post.updated|timesince}} 
+                    </small>
+                </h4>
+            </p>
+        </h2>
+
+        <div class="text-black-40">
+            {{post.content|linebreaks}}<br>
+
+        </div>
+
+        <div class="">
+        <a href="https://www.facebook.com/sharer/sharer.php?u= {{request.build_absolute_uri}}"class="button btn-floating btn-lg btn-fb" type="button" role="button"><i class="fab fa-facebook-f "></i></a>
+
+        <a href="https://twitter.com/home?status=I'{{post.content|urlshr}} {{request.build_absolute_uri}}"class="btn-floating btn-lg btn-tw" type="button" role="button"><i class="fab fa-twitter"></i></a>
+
+        <a href='https://plus.google.com/share?url= {{request.build_absolute_uri}}'class="btn-floating btn-lg btn-gplus" type="button" role="button"><i class="fab fa-google-plus-g"></i></a>
+         
+        </div>
+
+   <div class="row buttons">
+    <a href="{% url 'Post:update' pk=post.pk %}" class="btn  btn-default btn-rounded margin">Update</a>
+    <a href="{% url 'Post:delete' pk=post.pk %}" class="btn   btn-danger rounded margin">Delete</a>
+   </div>
+      <div class="publish-button">
+         <p><i class="text-black-60">
+           {% if post.publish %}
+               published:{{post.publish}}
+           
+           {% endif %}
+
+         </i></p>
+        <a class="btn btn-sm btn-info publish-button" href="{% url 'Post:publish' pk=post.pk %}"> publish</a>
+      </div>
+      <div class="col-lg-8">
+
+
+      </div>
+      <br>
+      <hr> 
+          <div class="fb-like" data-href="{{request.build_absolute_uri}}" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>   
+    </div>
+
+    <div class="jumbotron-fluid down">
+        <div class="col-lg-10">
+            <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5" data-width=""></div>
+
+        </div>
+        
+
+{% endblock navbar %}

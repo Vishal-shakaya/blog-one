@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block navbar %}
+
+<div class="container text-center">
+    <div class="jumbotron">
+        <h1 class="text-primary"> UPDATE POST</h1>
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update">
+        </form>
+    </div>
+</div>
+{% endblock navbar %}

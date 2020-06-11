@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+
+      <h1 class="text-default"> CREATE POST</h1>
+    <div class="container">
+    	<div class="jumbotron">
+    		<form  method="post" enctype="multipart/form-data" accept-charset="utf-8">
+    			{% csrf_token %}
+    			{{form.as_p}}
+    			<button type="submit" class="btn btn-primary">create</button>
+    			
+    		</form>
+    	</div>
+    </div>
+{% endblock navbar %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block navbar %}
+<div class="container-sm ">
+<br>
+<h1 class="text-center text-bold"> BLOG POSTS</h1>
+<hr>
+<form >
+
+<div class=" row col-lg-8 ">
+    <form  method="get" accept-charset="utf-8" class="form-inline active-cyan-4">
+  <input  name="q" value="{{requser.Get.q}}" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+    aria-label="Search">
+   <button type="submit" class="btn btn-rounded btn-warning btn-sm search-btn"> <i class="fas fa-search" aria-hidden="true"></i></button>
+</form>
+
+</div>
+
+    {% for post in post_list %}
+    <div class="card col-lg-6">
+        <!-- Card image -->
+        <!-- Card content -->
+        <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title">
+                <h4 class="text-success">
+                    <a class="text-capitalize" href="{% url 'Post:detail' pk=post.pk %}">{{post.title}}</a>
+                    <hr>
+                </h4>
+            </h4>
+            <!-- Text -->
+            <p class="card-text"> {{post.content|truncatechars:180}}</p>
+           <p> <i class="text-black-50"> Author : <i class="text-black-4">{{post.user.username}}</></i></p>
+            <a href="{% url 'Post:detail' pk=post.pk %}" class="btn btn-primary ">view</a>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+<footer class="page-footer font-small special-color-grey pt-4">
+    <!-- Footer Elements -->
+    <div class="container">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="pagination text-dark text-center ">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                        <a class="text-info z-depth-1 btn-link" href="?page=1">&laquo; first</a>
+                        <a class="text-info z-depth-1 btn-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                        <a class="text-info z-depth-1 btn-link" href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a class="text-info z-depth-1 btn-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+    <!-- Footer Elements -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center text-dark py-3 z-depth-2 ">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/" class="text-dark"> feelsafe security</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!-- Footer -->
+{% endblock navbar %}

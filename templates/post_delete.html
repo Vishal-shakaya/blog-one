@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+
+    <form  method="post" accept-charset="utf-8">
+    	{% csrf_token %}
+         <div class="container-sm">
+         		<h1 class="alert alert-info"> <p> conform delete</p></h1>
+    	<button type="submit" class="btn btn-outline-danger">Delete</button>
+         </div>
+    	
+    </form>
+{% endblock navbar %}

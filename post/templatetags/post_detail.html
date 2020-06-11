@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load urlshr %}
+
+{% block navbar %}
+<div class="container-sm">
+    <div class="jumbotron">
+      
+                <img width="250px" height="200px" src="{{post.image.url}}" alt="image">
+        <h1 class="text-secondary">
+            <p class="text-uppercase">{{post.title}}
+                <h4> <small class="text-info"> Updated  {{post.updated|timesince}} 
+                    </small>
+                </h4>
+            </p>
+        </h1>
+        <div class="text-black-50">
+         
+        </div>
+    </div>
+
+
+   <div class="row">
+        <a href="{% url 'Post:update' pk=post.pk %}" class="btn btn-outline-info">Update</a>
+    <a href="{% url 'Post:delete' pk=post.pk %}" class="btn btn-outline-danger">Delete</a>
+   </div>
+<div>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"> Facebook
+</a>
+
+<a href="https://twitter.com/home?status={{post.content|urlshr}}{{request.build_absolute_uri}}">
+Twitter
+</a>
+<a href='https://plus.google.com/share?url={{request.build_absolute_uri}}'>Google+</a>
+</div>
+
+</div>
+{% endblock navbar %}
